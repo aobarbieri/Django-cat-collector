@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 # Used to perform CRUD database operations in Django -> Python class that inherits from models.Model
@@ -9,4 +10,7 @@ class Cat(models.Model):
     age = models.IntegerField()
 
     def __str__(self):
-        return self.name
+        return f'{self.name} ({self.id})'
+    
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'cat_id': self.id})
